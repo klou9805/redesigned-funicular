@@ -6,7 +6,7 @@
 <?php
 	$bill = "";
 	$radiobutton = "";
-	$bilerror = false;
+	$billerror = false;
 	$radioerror = false;
 	$custompercentageerror = false;
 	$customradiobutton = "";
@@ -27,6 +27,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		if(isset($_POST["customradiobutton"]))
 		{
 			$customradiobutton = $_POST["customradiobutton"];
+			if((!is_numeric($customradiobutton) || $customradiobutton <= 0) && isset($customradiobutton))
+				$custompercentageerror = true;
 		}
 	}
 }
@@ -34,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
-	Bill Subtotal: $ <input type="text" name="bill" value="<?php echo $bill;?>" <?php if($billerror = true) {echo 'style="color:red">';}?>
+	Bill Subtotal: $ <input type="text" name="bill" value="<?php echo $bill;?>" <?php if($billerror == true) {echo 'style="color:red"';} else if($billerror == false){echo 'style="color:black">';}?><br>
 
 	<br>Tip Percentage:<br>
 <?php
@@ -59,7 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	}
 		echo 'Custom: ';
 ?>
-		<input type="text" name="customradiobutton" value="<?php if(isset($_POST['customradiobutton'])){echo $_POST['customradiobutton'];}?>"><br><br>
+		<input type="text" name="customradiobutton" value="<?php if(isset($_POST['customradiobutton'])){echo $_POST['customradiobutton'];}?>"<?php if($custompercentageerror == true) {echo 'style="color:red"';} else if($custompercentageerror == false){echo 'style="color:black">';}?><br>
 
 	<br>Split: <input type="text" name="split" value="<?php echo $split;?>"person(s);<br><br>
     <br><input type="submit" name="submit" value="Submit">
