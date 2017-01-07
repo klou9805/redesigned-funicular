@@ -1,7 +1,7 @@
 Pre-Work: "Tip Calculator
 Submitted by: klou
 
-Time spent: 5 hours spent in total
+Time spent: 9 hours spent in total
 
 ## User Stories
 
